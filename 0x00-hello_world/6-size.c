@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - Printing a line using puts
+ * main - A program tha print the size of data types
  *
  * Return: Always 0 (Success)
  */
