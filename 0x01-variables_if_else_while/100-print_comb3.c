@@ -19,10 +19,13 @@ int main(void)
 	{
 		for (b = d; b <= 9; b++)
 		{
+			if (a >= 0 && b > 1)
+			{
+				putchar(',');
+				putchar(' ');
+			}
 			putchar(a + '0');
 			putchar(b + '0');
-			putchar(',');
-			putchar(' ');
 		}
 		c++;
 		d++;
