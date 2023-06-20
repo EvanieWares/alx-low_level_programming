@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 void comma_space(void);
 void print_backwards(int n);
