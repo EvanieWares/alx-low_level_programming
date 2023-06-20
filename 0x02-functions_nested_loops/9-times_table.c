@@ -26,7 +26,7 @@ void times_table(void)
 	{
 		_putchar(i * 0 + '0');
 		comma_space();
-		for (j = 0; j <= 9; j++)
+		for (j = 1; j <= 9; j++)
 		{
 			temp = i * j;
 			if (temp < 10)
