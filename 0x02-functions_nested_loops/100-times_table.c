@@ -46,7 +46,8 @@ void print_number(int n)
 }
 
 /**
- * times_table - prints the 9 times table, starting with 0.
+ * print_times_table - prints the 9 times table, starting with 0.
+ * @n: table to print
  *
  * Return: void
  */
@@ -55,6 +56,12 @@ void print_times_table(int n)
 	int temp;
 	int i;
 	int j;
+
+	if (n == 0)
+	{
+		_putchar('0');
+		return;
+	}
 
 	for (i = 0; i <= n; i++)
 	{
