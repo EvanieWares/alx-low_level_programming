@@ -24,6 +24,7 @@ void print_to_98(int n)
 	{
 		print_forward(n);
 	}
+	_putchar('\n');
 }
 
 /**
