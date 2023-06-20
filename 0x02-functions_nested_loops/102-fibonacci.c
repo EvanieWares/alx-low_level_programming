@@ -23,5 +23,6 @@ int main(void)
 		first = second;
 		second = third;
 	}
+	printf("\n");
 	return (0);
 }
