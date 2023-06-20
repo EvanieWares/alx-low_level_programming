@@ -60,7 +60,7 @@ void print_times_table(int n)
 	if (n == 0)
 	{
 		_putchar('0');
-		-putchar(' ');
+		_putchar(' ');
 		return;
 	}
 
