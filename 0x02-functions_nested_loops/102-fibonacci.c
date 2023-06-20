@@ -13,7 +13,7 @@ int main(void)
 	int second = 2;
 	int third;
 
-	printf("%d, %d", fisrt, second);
+	printf("%d, %d", first, second);
 
 	for (i = 3; i <= 50; i++)
 	{
