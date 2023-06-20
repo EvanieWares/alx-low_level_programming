@@ -1,3 +1,6 @@
+#include <string.h>
+#include "main.h"
+
 /**
  * main - A program that prints "_putchar"
  *
@@ -12,8 +15,8 @@ int main(void)
 
 	for (i = 0; i < length; i++)
 	{
-		putchar(str[i]);
+		_putchar(str[i]);
 	}
-	putchar('\n');
+	_putchar('\n');
 	return (0);
 }
