@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdio.h>
-#include <string.h>
 
 /**
  * print_number - prints a number
@@ -10,15 +8,36 @@
 
 void print_number(int n)
 {
-	int i;
-	int len;
-	char str[5];
+	int digits;
+	int temp;
+	int div;
 
-	sprintf(str, "%d", n);
-	len = strlen(str);
-	
-	for (i = 0; i < len; i++)
+	if (n < 0)
 	{
-		_putchar(str[i]);
+		n = -n;
+		_putchar('-');
+	}
+
+	if (n < 10)
+	{
+		_putchar(n + '0');
+		return;
+	}
+
+	div = 1;
+	digits = 1;
+	temp = n;
+	while (temp > 9)
+	{
+		div *= 10;
+		digits++;
+		temp /= 10;
+	}
+
+	while (div > 0)
+	{
+		_putchar(n / div + '0');
+		n %= div;
+		div /= 10;
 	}
 }
