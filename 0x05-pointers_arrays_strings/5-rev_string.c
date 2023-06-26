@@ -15,7 +15,7 @@ int _strlen(char *str)
 	{
 		len++;
 	}
-	
+
 	return (len);
 }
 
@@ -33,6 +33,7 @@ void rev_string(char *s)
 	for (i = 0; i < len / 2; i++)
 	{
 		char temp = s[i];
+
 		s[i] = s[len - i - 1];
 		s[len - i - 1] = temp;
 	}
