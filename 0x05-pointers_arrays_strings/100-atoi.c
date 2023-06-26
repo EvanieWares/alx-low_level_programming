@@ -11,27 +11,27 @@ int _atoi(char *s)
 {
 	int len = 0;
 	int result = 0;
-	int conv = 0;
 	int sign = 1;
 
 	while (s[len] != '\0')
 	{
 		char temp = s[len];
 
-		if (conv == 1 && temp == ' ')
-		{
-			break;
-		}
-
-		if (conv == 0 && temp == '-')
+		if (temp == '-')
 		{
 			sign *= -1;
 		}
-
-		if (temp >= '0' && temp <= '9')
+		else if (temp == '+')
+		{
+			sign *= 1;
+		}
+		else if (temp >= '0' && temp <= '9')
 		{
 			result = result * 10 + (temp - '0');
-			conv = 1;
+		}
+		else if (result > 0)
+		{
+			break;
 		}
 		len++;
 	}
