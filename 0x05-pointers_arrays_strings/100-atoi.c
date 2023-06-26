@@ -1,5 +1,9 @@
 #include "main.h"
-#include <stdio.h>
+
+int _isdigit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
 
 /**
  * _atoi - converts a string to an integer
@@ -15,19 +19,17 @@ int _atoi(char *s)
 
 	while (s[len] != '\0')
 	{
-		char temp = s[len];
-
-		if (temp == '-')
+		if (s[len] == '-')
 		{
 			sign *= -1;
 		}
-		else if (temp == '+')
+		else if (s[len] == '+')
 		{
 			sign *= 1;
 		}
-		else if (temp >= '0' && temp <= '9')
+		else if (_isdigit(s[len]))
 		{
-			result = result * 10 + (temp - '0');
+			result = result * 10 + (s[len] - '0');
 		}
 		else if (result > 0)
 		{
