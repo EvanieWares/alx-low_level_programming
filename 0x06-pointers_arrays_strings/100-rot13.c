@@ -9,20 +9,23 @@
 char *rot13(char *str)
 {
 	int i;
+	int j;
+	char s1[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char s2[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		char c = str[i];
-		if ((c >= 'a' && c <= 'm') || (c >='A' && c <= 'M'))
+		j = 0;
+		while (j < 52)
 		{
-			c += 13;
+			if (str[i] == s1[j])
+			{
+				str[i] = s2[j];
+				break;
+			}
+			j++;
 		}
-		else if ((c >= 'n' && c <= 'z') || (c >= 'N' && c <= 'Z'))
-		{
-			c -= 13;
-		}
-		str[i] = c;
 		i++;
 	}
 	return (str);
