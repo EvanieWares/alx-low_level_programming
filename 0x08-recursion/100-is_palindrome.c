@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * _strlen - counts number of characters in a string
+ * @str: string to count
+ * @i: characters counted
+ * Return: length of a string
+ */
+
 int _strlen(char *str, int i)
 {
 	if (str[i] != '\0')
@@ -7,11 +14,19 @@ int _strlen(char *str, int i)
 	return (i);
 }
 
-int check(char *str, int i, int len)
+/**
+ * check - checks if a string is a palindrome
+ * @str: string to check
+ * @i: position of character to compare
+ * @j: position of character to compare
+ * Return: 1 if the string is palindrome, otherwise 0
+ */
+
+int check(char *str, int i, int j)
 {
-	if (i <= _strlen(str, 0) / 2 && str[i] == str[len])
-		return (check(str, i + 1, len - 1));
-	if (str[i] != str[len])
+	if (i <= _strlen(str, 0) / 2 && str[i] == str[j])
+		return (check(str, i + 1, j - 1));
+	if (str[i] != str[j])
 		return (0);
 	return (1);
 }
