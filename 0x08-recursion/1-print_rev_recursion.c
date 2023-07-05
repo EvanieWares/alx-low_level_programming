@@ -21,6 +21,23 @@ void print(char *str, int len)
 }
 
 /**
+ * _strlen - counts number of characters in a string
+ * @str: string to count from
+ * @len: number of characters counted
+ * Return: number of characters
+ */
+
+int _strlen(char *str, int len)
+{
+	if (str[len] == '\0')
+	{
+		return (len);
+	}
+
+	return (_strlen(str, ++len));
+}
+
+/**
  * _print_rev_recursion - prints a string in reverse
  * @s: string to print
  * Return: void
@@ -30,18 +47,12 @@ void _print_rev_recursion(char *s)
 {
 	int len;
 
-	len = 0;
-	while (s[len] != '\0')
-	{
-		len++;
-	}
+	len = _strlen(s, 0);
 
 	if (len == 0)
 	{
-		_putchar('\n');
+		return;
 	}
-	else
-	{
-		print(s, len);
-	}
+
+	print(s, len);
 }
