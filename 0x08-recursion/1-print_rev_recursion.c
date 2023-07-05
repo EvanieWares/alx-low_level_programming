@@ -9,11 +9,7 @@
 
 void print(char *str, int len)
 {
-	if (len < 0)
-	{
-		return;
-	}
-	else
+	if (len >= 0)
 	{
 		_putchar(str[len]);
 		print(str, len - 1);
@@ -54,5 +50,5 @@ void _print_rev_recursion(char *s)
 		return;
 	}
 
-	print(s, len);
+	print(s, len - 1);
 }
