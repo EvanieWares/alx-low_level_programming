@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	}
 	else
 		printf("Error\n");
-	
+
 	return (0);
 }
 
@@ -44,7 +44,7 @@ int countCoins(int num)
 		return (num / 5 + countCoins(num % 5));
 	if (num / 2)
 		return (num / 2 + countCoins(num % 2));
-	
+
 	return (num);
 }
 
