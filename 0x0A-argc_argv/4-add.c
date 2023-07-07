@@ -36,6 +36,7 @@ int main(int argc, char **argv)
 		for (i = 1; i < argc; i++)
 		{
 			char *str = argv[i];
+
 			if (containsNonDigit(str))
 			{
 				printf("Error\n");
