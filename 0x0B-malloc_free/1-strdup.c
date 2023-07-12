@@ -34,14 +34,21 @@ char *_strdup(char *str)
 	int len;
 	char *dup;
 
+	if (str == NULL)
+		return (NULL);
+
 	len = _strlen(str);
 	dup = (char *) malloc(len + 1);
 
-	if (len == 0 || str == NULL)
+	if (dup == NULL)
 		return (NULL);
 
-	for (i = 0; i < len; i++)
+	i = 0;
+	while (i != len)
+	{
 		dup[i] = str[i];
+		i++;
+	}
 
 	dup[len] = '\0';
 	return (dup);
