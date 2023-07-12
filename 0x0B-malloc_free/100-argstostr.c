@@ -22,7 +22,7 @@ char *argstostr(int ac, char **av)
 	}
 
 	total_len = 1;
-	for (int i = 0; i < ac; i++)
+	for (i = 0; i < ac; i++)
 	{
 		total_len += strlen(av[i]) + 1;
 	}
@@ -35,7 +35,7 @@ char *argstostr(int ac, char **av)
 
 	*str = '\0';
 
-	for (int i = 0; i < ac; i++)
+	for (i = 0; i < ac; i++)
 	{
 		strcat(str, av[i]);
 		strcat(str, "\n");
