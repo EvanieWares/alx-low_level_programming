@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "main.h"
 #include <string.h>
+#include <ctype.h>
 
 /**
  * count_words - Counts the number of words in a string.
@@ -36,6 +37,24 @@ int count_words(char *str)
 }
 
 /**
+ * is_all_whitespace - checks if an array of chars is all whitespaces
+ * @str: array of chars to check
+ * Return: 1 if true, otherwise 0
+ */
+
+int is_all_whitespace(const char *str)
+{
+	while (*str)
+	{
+		if (!isspace((unsigned char)*str)){
+			return (0);
+		}
+		str++;
+	}
+	return (1);
+}
+
+/**
  * strtow - Splits a string into words.
  * @str: The string to split.
  *
@@ -48,7 +67,7 @@ char **strtow(char *str)
 	char **words;
 	int i, j, k, len, word_count;
 
-	if (str == NULL || *str == '\0' || strcmp(str, " ") == 0)
+	if (str == NULL || *str == '\0' || is_all_whitespace(str))
 		return (NULL);
 	word_count = count_words(str);
 	words = malloc(sizeof(char *) * (word_count + 1));
