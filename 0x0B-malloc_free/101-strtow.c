@@ -46,7 +46,8 @@ int is_all_whitespace(const char *str)
 {
 	while (*str)
 	{
-		if (!isspace((unsigned char)*str)){
+		if (!isspace((unsigned char)*str))
+		{
 			return (0);
 		}
 		str++;
