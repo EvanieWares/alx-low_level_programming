@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-/*
+/**
  * _strlen - returns the length of a string
  * @str: string to count
  * Return: number of characters in the string
@@ -20,7 +20,7 @@ int _strlen(char *str)
 	return (len);
 }
 
-/*
+/**
  * string_nconcat - concatenates two strings
  * @s1: first string
  * @s2: second string
@@ -44,7 +44,7 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if ((int) n >= s2len)
 		strlen = s1len + s2len;
 	else
-		strlen = s1len + n;
+		strlen = s1len + (int) n;
 
 	str = malloc(strlen + 1);
 	if (str == NULL)
@@ -59,5 +59,7 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 			str[i] = s2[i - s1len];
 		i++;
 	}
+
+	str[strlen] = '\0';
 	return (str);
 }
