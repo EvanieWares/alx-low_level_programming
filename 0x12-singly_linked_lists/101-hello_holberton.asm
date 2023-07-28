@@ -1,16 +1,17 @@
-extern printf
+section .data
+	message db 'Hello, Holberton', 0x0A, 0
 
 section .text
 	global main
 
+	extern printf
+
 main:
-	MOV rdi, msg ; set 1st argument (msg string)
-	MOV rax, 0 ; printf()
-	call printf
+	sub rsp, 8      ; allocate space for two 4-byte arguments on the stack
+	lea rdi, [message]  ; load address of message into rdi, first argument for printf
+	xor eax, eax    ; zero out eax register
+	call printf     ; call printf function
+	add rsp, 8      ; deallocate stack space
 
-	MOV rax, 60 ; syscall for exit
-	MOV rdi, 0 ; exit code 0
-	SYSCALL
-
-section .data
-	msg: DB "Hello, Holberton", 10 ; string to print
+	xor eax, eax    ; zero out eax register
+	ret             ; return from main function
