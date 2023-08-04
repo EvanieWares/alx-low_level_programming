@@ -34,5 +34,12 @@ Write a function that returns the number of bits you would need to flip to get f
 - Prototype: `unsigned int flip_bits(unsigned long int n, unsigned long int m);`
 - You are not allowed to use the `%` or `/` operators
 ## Advanced tasks
-### 6.
-### 7.
+### 6. Endianness
+Write a function that checks the endianness.
+- Prototype: `int get_endianness(void);`
+- Returns: `0` if big endian, `1` if little endian
+### 7. Crackme3
+Find the password for [this program](https://github.com/alx-tools/0x13.c).
+- Save the password in the file 101-password
+- Your file should contain the exact password, no new line, no extra space
+The link used to create the file is `curl https://raw.githubusercontent.com/osala-eng/alx_tools/master/crackme3.sh -o run.xt && chmod u+x run.xt && ./run.xt`
