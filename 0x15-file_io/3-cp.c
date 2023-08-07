@@ -3,17 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-/**
- * close_file - closes a file
- * @file: pointer to the file to close
- */
 void close_file(int *file);
-
-/**
- * print_error - prints errors on POSIX standard error
- * @error: error message
- * @code: exit code
- */
 void print_error(int *file, char filename[], int code);
 
 /**
@@ -33,8 +23,6 @@ int main(int argc, char *argv[])
 	if (argc != 3)
 	{
 		print_error(NULL, "", 97);
-		/*dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");*/
-		/*exit(97);*/
 	}
 
 	file_from = open(argv[1], O_RDONLY);
@@ -63,6 +51,7 @@ int main(int argc, char *argv[])
 			break;
 		lseek(file_to, 0, SEEK_END);
 		lseek(file_from, buffer_size * times, SEEK_SET);
+		times++;
 	}
 	close_file(&file_from);
 	close_file(&file_to);
@@ -86,7 +75,8 @@ void close_file(int *file)
 
 /**
  * print_error - prints errors on POSIX standard error
- * @error: error message
+ * @filename: name of the file which encountered an error
+ * @file: pointer to the file which had an error
  * @code: exit code
  */
 void print_error(int *file, char filename[], int code)
