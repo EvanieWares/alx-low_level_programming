@@ -4,7 +4,6 @@
 #include <unistd.h>
 
 void close_file(int *file);
-void print_error(int *file, char filename[], int code);
 
 /**
  * main - copies the contents of a file to another file
@@ -22,30 +21,37 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		print_error(NULL, "", 97);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
 	}
 
 	file_from = open(argv[1], O_RDONLY);
 	if (file_from < 0)
 	{
-		print_error(&file_from, argv[1], 98);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
 	}
 	file_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, permissions);
 	if (file_to < 0)
 	{
-		print_error(&file_to, argv[2], 99);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
 	}
 	while (1)
 	{
 		read_bytes = read(file_from, buffer, buffer_size);
 		if (read_bytes < 0)
 		{
-			print_error(&file_from, argv[1], 98);
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+			close_file(&file_from);
+			exit(98);
 		}
 		write_bytes = write(file_to, buffer, read_bytes);
 		if (write_bytes < 0)
 		{
-			print_error(&file_to, argv[2], 99);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			close_file(&file_to);
+			exit(99);
 		}
 		if (read_bytes < buffer_size)
 			break;
@@ -53,8 +59,8 @@ int main(int argc, char *argv[])
 		lseek(file_from, buffer_size * times, SEEK_SET);
 		times++;
 	}
-	close_file(&file_from);
-	close_file(&file_to);
+	close_file(file_from);
+	close_file(file_to);
 	return (0);
 }
 
@@ -62,59 +68,13 @@ int main(int argc, char *argv[])
  * close_file - closes a file
  * @file: pointer to the file to close
  */
-void close_file(int *file)
+void close_file(int file)
 {
-	int result = close(*file);
+	int result = close(file);
 
 	if (result < 0)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", *file);
 		exit(100);
-	}
-}
-
-/**
- * print_error - prints errors on POSIX standard error
- * @filename: name of the file which encountered an error
- * @file: pointer to the file which had an error
- * @code: exit code
- */
-void print_error(int *file, char filename[], int code)
-{
-	switch (code)
-	{
-		case 98:
-			{
-				dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
-				if (file != NULL)
-				{
-					close_file(file);
-				}
-				else
-				{
-					(void) file;
-				}
-				exit(code);
-			}
-		case 99:
-			{
-				dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-				if (file != NULL)
-				{
-					close_file(file);
-				}
-				else
-				{
-					(void) file;
-				}
-				exit(code);
-			}
-		default:
-			{
-				dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-				(void) file;
-				(void) filename;
-				exit(code);
-			}
 	}
 }
