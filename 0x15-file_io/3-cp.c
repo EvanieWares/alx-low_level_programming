@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void close_file(int *file);
+void close_file(int file);
 
 /**
  * main - copies the contents of a file to another file
@@ -43,14 +43,14 @@ int main(int argc, char *argv[])
 		if (read_bytes < 0)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-			close_file(&file_from);
+			close_file(file_from);
 			exit(98);
 		}
 		write_bytes = write(file_to, buffer, read_bytes);
 		if (write_bytes < 0)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			close_file(&file_to);
+			close_file(file_to);
 			exit(99);
 		}
 		if (read_bytes < buffer_size)
@@ -74,7 +74,7 @@ void close_file(int file)
 
 	if (result < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", *file);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file);
 		exit(100);
 	}
 }
