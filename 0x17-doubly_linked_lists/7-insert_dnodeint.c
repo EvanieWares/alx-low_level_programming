@@ -7,34 +7,42 @@
  * @n: data (n) to add in the new node
  *
  * Return: pointer to the new node, or NULL if it fails
-*/
+ */
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	unsigned int i = 0;
-	dlistint_t *new, *node = *h;
+	unsigned int i = 1;
+	dlistint_t *new, *current;
 
-	new = malloc(sizeof(dlistint_t));
-	if (new == NULL)
+	if (idx == 0)
 	{
-		return (NULL);
+		return (add_dnodeint(h, n));
 	}
-	new->n = n;
-	new->next = NULL;
-	new->prev = NULL;
 
-
-	while (node != NULL && i < idx - 1)
+	current = *h;
+	while (current)
 	{
-		node = node->next;
+		if (i == idx)
+		{
+			if (current->next)
+			{
+				new = malloc(sizeof(dlistint_t));
+				if (new != NULL)
+				{
+					new->n = n;
+					new->next = current->next;
+					new->prev = current;
+					current->next->prev = new;
+					current->next = new;
+					return (new);
+				}
+			}
+			else
+			{
+				return (add_dnodeint_end(h, n));
+			}
+		}
+		current = current->next;
 		i++;
 	}
-	if (node == NULL || node->next == NULL)
-	{
-		return (NULL);
-	}
-	new->next = node->next;
-	new->prev = node;
-	node->next->prev = new;
-	node->next = new;
-	return (new);
+	return (NULL);
 }
