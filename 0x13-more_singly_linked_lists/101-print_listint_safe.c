@@ -32,7 +32,7 @@ size_t print_listint_safe(const listint_t *head)
 {
 	size_t size = 0;
 	listint_t *node;
-	listint_t *addresses[100];
+	listint_t *addresses[1024];
 
 	if (head == NULL)
 	{
