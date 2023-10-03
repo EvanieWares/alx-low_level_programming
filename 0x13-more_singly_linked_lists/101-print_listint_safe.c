@@ -36,7 +36,7 @@ size_t print_listint_safe(const listint_t *head)
 
 	if (head == NULL)
 	{
-		return (0);
+		exit(98);
 	}
 
 	node = (listint_t *)head;
@@ -45,7 +45,7 @@ size_t print_listint_safe(const listint_t *head)
 		if (isLoop(addresses, node))
 		{
 			printf("-> [%p] %d\n", (void *)node, node->n);
-			exit(98);
+			break;
 		}
 		printf("[%p] %d\n", (void *)node, node->n);
 		addresses[size] = node;
