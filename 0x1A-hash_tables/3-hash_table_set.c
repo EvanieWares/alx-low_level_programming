@@ -1,30 +1,6 @@
 #include "hash_tables.h"
 
 /**
- * key_exist - checks if the key already exit, if yes, update the value
- * @key: the key
- * @value: value associated with the key
- * @head: head element of hash_node_t list
- *
- * Return: 1 if key exist, otherwise 0
- */
-int key_exist(hash_node_t *head, const char *key, const char *value)
-{
-	hash_node_t *node = head;
-
-	while (node)
-	{
-		if (strcmp(node->key, key) == 0)
-		{
-			free(node->value);
-			node->value = strdup(value);
-			return (1);
-		}
-	}
-	return (0);
-}
-
-/**
  * hash_table_set - adds an element to the hash table
  * @ht: the hash table
  * @key: the key
@@ -35,34 +11,39 @@ int key_exist(hash_node_t *head, const char *key, const char *value)
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
-	hash_node_t *node;
+	hash_node_t *new_node, *current;
 
-	if (!key || !value || !ht)
-	{
+	if (!ht || !key || !*key)
 		return (0);
-	}
-	node = malloc(sizeof(hash_node_t));
-	if (node == NULL)
-	{
-		return (0);
-	}
-	node->key = strdup(key);
-	node->value = strdup(value);
-	node->next = NULL;
 
-	index = key_index((const unsigned char *)key, ht->size);
-	if (ht->array[index] == NULL)
+	index = hash_djb2((unsigned char *)key) % ht->size;
+	current = ht->array[index];
+	while (current)
 	{
-		ht->array[index] = node;
-	}
-	else
-	{
-		if (key_exist(ht->array[index], key, value))
+		if (strcmp(current->key, key) == 0)
 		{
-			return (1);
+			/* Update the value */
+			free(current->value);
+			current->value = duplicate_value(value);
+			return (current->value ? 1 : 0);
 		}
-		node->next = ht->array[index];
-		ht->array[index] = node;
+		current = current->next;
 	}
+
+	new_node = malloc(sizeof(hash_node_t));
+	if (!new_node)
+		return (0);
+
+	new_node->key = strdup(key);
+	new_node->value = strdup(value);
+	if (!new_node->key || !new_node->value)
+	{
+		free(new_node->key);
+		free(new_node->value);
+		free(new_node);
+		return (0);
+	}
+	new_node->next = ht->array[index];
+	ht->array[index] = new_node;
 	return (1);
 }
