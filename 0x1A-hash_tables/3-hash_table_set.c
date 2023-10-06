@@ -4,6 +4,7 @@
  * key_exist - checks if the key already exit, if yes, update the value
  * @key: the key
  * @value: value associated with the key
+ * @head: head element of hash_node_t list
  *
  * Return: 1 if key exist, otherwise 0
  */
@@ -36,7 +37,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	unsigned long int index;
 	hash_node_t *node;
 
-	if (key == NULL || strcmp(key, "") == 0)
+	if (!key || !value || !ht)
 	{
 		return (0);
 	}
@@ -49,7 +50,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	node->value = strdup(value);
 	node->next = NULL;
 
-	index = key_index((const unsigned char *) key, ht->size);
+	index = key_index((const unsigned char *)key, ht->size);
 	if (ht->array[index] == NULL)
 	{
 		ht->array[index] = node;
