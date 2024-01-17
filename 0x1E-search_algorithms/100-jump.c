@@ -2,6 +2,18 @@
 #include <math.h>
 
 /**
+ * min - Returns the minimum of 2 values
+ * @a: First value
+ * @b: Second value
+ *
+ * Return: The minimum of 2 values
+*/
+size_t min(size_t a, size_t b)
+{
+	return ((a < b) ? a : b);
+}
+
+/**
  * jump_search - Searches for a value in a sorted array of integers using
  * the Jump search algorithm.
  * @array: Pointer to the first element of the array to search in
@@ -39,16 +51,4 @@ int jump_search(int *array, size_t size, int value)
 
 	printf("Value checked array[%ld] = [%d]\n", i, array[i]);
 	return (array[i] == value ? (int) i : -1);
-}
-
-/**
- * min - Returns the minimum of 2 values
- * @a: First value
- * @b: Second value
- *
- * Return: The minimum of 2 values
-*/
-size_t min(size_t a, size_t b)
-{
-	return ((a < b) ? a : b);
 }
