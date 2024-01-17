@@ -1,27 +1,33 @@
 #include "search_algos.h"
 
 /**
- * print_array - Searches for a value in an array of integers using
- * the Linear search algorithm.
- * @array: Pointer to the first element of the array to print
- * @start: The first index to start printing from
- * @end: The last index to print
- */
-void print_array(int *array, int start, int end)
+  * binary_search_recursive - Searches recursively for a value in a sorted
+  *                             array of integers using binary search.
+  * @array: A pointer to the first element of the [sub]array to search.
+  * @low: The starting index of the [sub]array to search.
+  * @high: The ending index of the [sub]array to search.
+  * @value: The value to search for.
+  *
+  * Return: The index where value is located, otherwise -1
+  */
+int binary_search_recursive(int *array, size_t low, size_t high, int value)
 {
-	if (start <= end)
-	{
-		printf("%d", array[start]);
-		if (start != end)
-		{
-			printf(", ");
-		}
-		print_array(array, start + 1, end);
-	}
-	else
-	{
-		printf("\n");
-	}
+	size_t i;
+
+	if (high < low)
+		return (-1);
+
+	printf("Searching in array: ");
+	for (i = low; i < high; i++)
+		printf("%d, ", array[i]);
+	printf("%d\n", array[i]);
+
+	i = low + (high - low) / 2;
+	if (array[i] == value && (i == low || array[i - 1] != value))
+		return (i);
+	if (array[i] >= value)
+		return (binary_search_recursive(array, low, i, value));
+	return (binary_search_recursive(array, i + 1, high, value));
 }
 
 /**
@@ -34,30 +40,10 @@ void print_array(int *array, int start, int end)
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-	size_t mid, low, high, result = -1;
-
-	if (array == NULL || size < 1)
-		return (result);
-
-	low = 0;
-	high = size - 1;
-	while (low <= high)
+	if (array == NULL || size == 0)
 	{
-		mid = (low + high) / 2;
-
-		printf("Searching in array: ");
-		print_array(array, low, high);
-		if (value < array[mid])
-			high = mid - 1;
-		else if (value > array[mid])
-			low = mid + 1;
-		else
-		{
-			result = mid;
-			if (array[mid - 1] != value)
-				break;
-			high = mid;
-		}
+		return (-1);
 	}
-	return (result);
+
+	return (binary_search_recursive(array, 0, size - 1, value));
 }
