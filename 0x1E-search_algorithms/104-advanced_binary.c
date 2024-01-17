@@ -9,18 +9,18 @@
  */
 void print_array(int *array, int start, int end)
 {
-	printf("Searching in array: ");
-	for (; start <= end; start++)
+	if (start <= end)
 	{
 		printf("%d", array[start]);
-		if (start == end)
-		{
-			printf("\n");
-		}
-		else
+		if (start != end)
 		{
 			printf(", ");
 		}
+		print_array(array, start + 1, end);
+	}
+	else
+	{
+		printf("\n");
 	}
 }
 
@@ -45,6 +45,7 @@ int advanced_binary(int *array, size_t size, int value)
 	{
 		mid = (low + high) / 2;
 
+		printf("Searching in array: ");
 		print_array(array, low, high);
 		if (value < array[mid])
 			high = mid - 1;
